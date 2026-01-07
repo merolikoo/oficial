@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merolikoo - Plataforma de Anuncios Clasificados</title>
+    <meta name="description" content="Merolikoo es la plataforma líder de anuncios clasificados. Publica y encuentra productos nuevos y de segunda mano de forma segura y sencilla.">
+    <meta name="keywords" content="anuncios clasificados, compra venta, segunda mano, productos usados">
+    <meta name="author" content="Merolikoo">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Merolikoo - Tu plataforma de confianza para comprar y vender">
+    <meta property="og:description" content="Compra y vende de forma segura en la mayor plataforma de anuncios clasificados">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://merolikoo.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET Y VARIABLES ===== */
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2d4a8a;
+            --secondary: #e63946;
+            --secondary-light: #ff6b6b;
+            --accent: #2a9d8f;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --success: #28a745;
+            --shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.05);
+            --radius: 10px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--primary);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-accent {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: var(--secondary-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* ===== HEADER SIMPLIFICADO ===== */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .logo-subtext {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .nav-simple {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-simple a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 8px 4px;
+            position: relative;
+        }
+        
+        .nav-simple a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-simple a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        
+        .nav-simple a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* ===== HERO / INICIO ===== */
+        .hero {
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.9) 0%, rgba(42, 157, 143, 0.85) 100%), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* ===== INFORMACIÓN DE LA PLATAFORMA ===== */
+        .platform-info {
+            padding: 80px 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .info-card p {
+            color: var(--gray);
+        }
+        
+        .platform-stats {
+            background-color: var(--primary);
+            color: white;
+            padding: 80px 0;
+            margin: 80px 0;
+        }
+        
+        .stats-container {
+            text-align: center;
+        }
+        
+        .stats-container h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-item {
+            padding: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* ===== DESCARGA DE APP ===== */
+        .download-app {
+            padding: 100px 0;
+        }
+        
+        .download-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .download-text {
+            flex: 1;
+        }
+        
+        .download-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .download-text p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--gray);
+        }
+        
+        .app-version {
+            background: var(--gray-light);
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        
+        .app-version span {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 18px 30px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .download-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-btn i {
+            font-size: 1.8rem;
+        }
+        
+        .download-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .download-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        /* ===== FOOTER SIMPLIFICADO ===== */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        
+        .footer-logo .logo-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-logo .logo-text {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1100px) {
+            .download-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .download-buttons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            html {
+                font-size: 15px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-simple {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-simple.active {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        /* ===== ACCESIBILIDAD ===== */
+        .focus-visible:focus {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body itemscope itemtype="http://schema.org/WebSite">
+    <!-- ===== HEADER SIMPLIFICADO ===== -->
+    <header role="banner">
+        <div class="container header-container">
+            <a href="#home" class="logo" aria-label="Merolikoo - Ir al inicio">
+                <div class="logo-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div>
+                    <div class="logo-text">Merolikoo</div>
+                    <div class="logo-subtext">Anuncios Clasificados</div>
+                </div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="nav-simple" id="mainNav" role="navigation" aria-label="Navegación principal">
+                <a href="#home" class="focus-visible">Inicio</a>
+                <a href="#download" class="focus-visible">Descargar App</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO / INICIO ===== -->
+    <section class="hero" id="home" role="region" aria-labelledby="heroTitle">
+        <div class="container">
+            <h1 id="heroTitle">Compra y vende con confianza en <span style="color: #ffd166;">Merolikoo</span></h1>
+            <p>La plataforma de anuncios clasificados más segura y fácil de usar. Miles de productos nuevos y de segunda mano te esperan.</p>
+            
+            <div style="margin-top: 50px;">
+                <a href="#download" class="btn btn-accent focus-visible" style="padding: 15px 40px;">
+                    <i class="fas fa-download"></i> Descargar App
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INFORMACIÓN DE LA PLATAFORMA ===== -->
+    <section class="platform-info" role="region" aria-labelledby="infoTitle">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="infoTitle">¿Qué es Merolikoo?</h2>
+                <p>Una plataforma diseñada para conectar compradores y vendedores de forma segura y eficiente</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card" role="article" aria-label="Plataforma segura">
+                    <div class="info-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Plataforma Segura</h3>
+                    <p>Implementamos sistemas de verificación y protección para garantizar transacciones seguras entre usuarios.</p>
+                </div>
+                
+                <div class="info-card" role="article" aria-label="Fácil de usar">
+                    <div class="info-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Fácil de Usar</h3>
+                    <p>Interfaz intuitiva diseñada para que cualquier persona pueda publicar o buscar productos en minutos.</p>
+                </div>
+                
+                <div class="info-card" role="article" aria-label="Completamente gratuito">
+                    <div class="info-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Completamente Gratuito</h3>
+                    <p>Publica y busca anuncios sin ningún costo. Sin comisiones ocultas ni tarifas sorpresa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ESTADÍSTICAS ===== -->
+    <section class="platform-stats" role="region" aria-labelledby="statsTitle">
+        <div class="container stats-container">
+            <h2 id="statsTitle">Merolikoo en números</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-label">Anuncios activos</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number" data-count="25000">0</div>
+                    <div class="stat-label">Usarios registrados</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number" data-count="1200">0</div>
+                    <div class="stat-label">Transacciones diarias</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">% de satisfacción</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CÓMO FUNCIONA ===== -->
+    <section class="platform-info" role="region" aria-labelledby="howTitle">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="howTitle">Cómo funciona</h2>
+                <p>Publicar y encontrar lo que necesitas es muy sencillo con nuestra plataforma</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card" role="article" aria-label="Regístrate gratis">
+                    <div class="info-icon">
+                        <div style="font-weight: 700;">1</div>
+                    </div>
+                    <h3>Regístrate Gratis</h3>
+                    <p>Crea una cuenta en Merolikoo en menos de 2 minutos. Solo necesitas un email o tu cuenta de Google.</p>
+                </div>
+                
+                <div class="info-card" role="article" aria-label="Publica tu anuncio">
+                    <div class="info-icon">
+                        <div style="font-weight: 700;">2</div>
+                    </div>
+                    <h3>Publica tu Anuncio</h3>
+                    <p>Sube fotos y describe lo que quieres vender. Es rápido, fácil y completamente gratis para particulares.</p>
+                </div>
+                
+                <div class="info-card" role="article" aria-label="Conecta con compradores">
+                    <div class="info-icon">
+                        <div style="font-weight: 700;">3</div>
+                    </div>
+                    <h3>Conecta con Compradores</h3>
+                    <p>Recibe ofertas y responde a preguntas de compradores interesados a través de nuestro chat seguro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DESCARGA DE APP ===== -->
+    <section class="download-app" id="download" role="region" aria-labelledby="downloadTitle">
+        <div class="container">
+            <div class="download-content">
+                <div class="download-text">
+                    <h2 id="downloadTitle">Descarga nuestra aplicación</h2>
+                    <p>Lleva Merolikoo contigo a todas partes. Nuestra aplicación móvil te permite comprar y vender desde cualquier lugar, con notificaciones instantáneas y funciones exclusivas.</p>
+                    
+                    <div class="app-version">
+                        <i class="fas fa-info-circle"></i> Última versión: <span id="appVersion">2.5.3</span> | Actualizada: <span id="updateDate">15/03/2024</span>
+                    </div>
+                    
+                    <div class="download-buttons">
+                        <a href="https://apk.e-droid.net/apk/app3879235-o594vj.apk?v=2" class="download-btn focus-visible" aria-label="Descargar aplicación para Android" id="downloadLink">
+                            <i class="fab fa-android"></i>
+                            <div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Descargar para</div>
+                                <div>Android</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: var(--radius);">
+                        <h3 style="margin-bottom: 10px; font-size: 1.2rem;">Novedades en esta versión</h3>
+                        <ul style="text-align: left; color: var(--gray); padding-left: 20px;">
+                            <li style="margin-bottom: 8px;">Mejoras en la velocidad de carga</li>
+                            <li style="margin-bottom: 8px;">Nuevo sistema de notificaciones</li>
+                            <li style="margin-bottom: 8px;">Optimización de consumo de batería</li>
+                            <li>Corrección de errores menores</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="download-image">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aplicación móvil de Merolikoo en un smartphone">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER SIMPLIFICADO ===== -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#home" class="footer-logo" aria-label="Merolikoo - Ir al inicio">
+                    <div class="logo-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="logo-text">Merolikoo</div>
+                </a>
+                
+                <p style="max-width: 500px; margin: 0 auto 30px; color: rgba(255, 255, 255, 0.7);">
+                    La plataforma líder de anuncios clasificados. Conectamos a compradores y vendedores de forma segura y eficiente.
+                </p>
+                
+                <div class="footer-links">
+                    <a href="#home">Inicio</a>
+                    <a href="#download">Descargar App</a>
+                    <a href="#" onclick="showPrivacyModal()">Política de Privacidad</a>
+                    <a href="#" onclick="showTermsModal()">Términos de Uso</a>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook de Merolikoo"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter de Merolikoo"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram de Merolikoo"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="currentYear">2024</span> Merolikoo - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== MODALES ===== -->
+    <div id="privacyModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 40px; border-radius: var(--radius); max-width: 600px; max-height: 80vh; overflow-y: auto; margin: 20px;">
+            <h2 style="margin-bottom: 20px;">Política de Privacidad</h2>
+            <p style="margin-bottom: 15px;">En Merolikoo respetamos tu privacidad y nos comprometemos a proteger tus datos personales.</p>
+            <p style="margin-bottom: 15px;">Solo recopilamos la información necesaria para proporcionar nuestros servicios y mejorar tu experiencia.</p>
+            <p style="margin-bottom: 20px;">Nunca compartimos tu información personal con terceros sin tu consentimiento explícito.</p>
+            <button onclick="closeModal()" class="btn btn-primary">Cerrar</button>
+        </div>
+    </div>
+    
+    <div id="termsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 40px; border-radius: var(--radius); max-width: 600px; max-height: 80vh; overflow-y: auto; margin: 20px;">
+            <h2 style="margin-bottom: 20px;">Términos de Uso</h2>
+            <p style="margin-bottom: 15px;">Al usar Merolikoo, aceptas nuestros términos de uso.</p>
+            <p style="margin-bottom: 15px;">Los usuarios son responsables de la veracidad de la información publicada en sus anuncios.</p>
+            <p style="margin-bottom: 15px;">Merolikoo se reserva el derecho de eliminar anuncios que no cumplan con nuestras políticas.</p>
+            <p style="margin-bottom: 20px;">El uso de la plataforma es gratuito para particulares.</p>
+            <button onclick="closeModal()" class="btn btn-primary">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPT PRINCIPAL ===== -->
+    <script>
+        // Configuración
+        const CONFIG = {
+            appVersion: '2.5.3',
+            lastUpdate: '15/03/2024',
+            downloadUrl: 'https://apk.e-droid.net/apk/app3879235-o594vj.apk?v=2'
+        };
+        
+        // Inicialización cuando el DOM está listo
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupEventListeners();
+            animateStats();
+        });
+        
+        // Funciones de inicialización
+        function initializeApp() {
+            // Establecer año actual
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Configurar información de la app
+            document.getElementById('appVersion').textContent = CONFIG.appVersion;
+            document.getElementById('updateDate').textContent = CONFIG.lastUpdate;
+            
+            // Configurar enlace de descarga
+            document.getElementById('downloadLink').href = CONFIG.downloadUrl;
+        }
+        
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Menú móvil
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            
+            // Cerrar menú al hacer clic en un enlace
+            document.querySelectorAll('.nav-simple a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+            
+            // Seguridad: Registrar descargas
+            document.getElementById('downloadLink').addEventListener('click', function(e) {
+                logDownload();
+            });
+            
+            // Seguridad: Detectar bots (simulación)
+            detectBotActivity();
+        }
+        
+        // Animación de estadísticas
+        function animateStats() {
+            const statElements = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const target = parseInt(element.getAttribute('data-count'));
+                        animateCount(element, target);
+                        observer.unobserve(element);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statElements.forEach(el => observer.observe(el));
+        }
+        
+        function animateCount(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 30);
+        }
+        
+        // Funciones de seguridad
+        function logDownload() {
+            const timestamp = new Date().toISOString();
+            const userAgent = navigator.userAgent;
+            
+            // En un entorno real, enviaríamos esto a un servidor
+            console.log(`[${timestamp}] Descarga iniciada - User Agent: ${userAgent}`);
+            
+            // Simular registro de descarga
+            localStorage.setItem('lastDownloadAttempt', timestamp);
+        }
+        
+        function detectBotActivity() {
+            // Detectar comportamiento sospechoso simple
+            const mouseMovements = [];
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseMovements.push({ x: e.clientX, y: e.clientY, time: Date.now() });
+                
+                // Mantener solo los últimos 10 movimientos
+                if (mouseMovements.length > 10) mouseMovements.shift();
+            });
+            
+            // Verificar si el movimiento parece humano
+            setTimeout(() => {
+                if (mouseMovements.length < 3) {
+                    console.log('Posible actividad de bot detectada');
+                }
+            }, 5000);
+        }
+        
+        // Funciones de los modales
+        function showPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'flex';
+        }
+        
+        function showTermsModal() {
+            document.getElementById('termsModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+            document.getElementById('termsModal').style.display = 'none';
+        }
+        
+        // Cerrar modales al hacer clic fuera
+        window.addEventListener('click', (e) => {
+            if (e.target.id === 'privacyModal' || e.target.id === 'termsModal') {
+                closeModal();
+            }
+        });
+        
+        // Prevención básica de spam
+        let formSubmitCount = 0;
+        document.addEventListener('submit', (e) => {
+            formSubmitCount++;
+            
+            if (formSubmitCount > 3) {
+                e.preventDefault();
+                alert('Demasiados intentos. Por favor, espera unos minutos.');
+                return false;
+            }
+        });
+        
+        // Resetear contador cada minuto
+        setInterval(() => {
+            formSubmitCount = 0;
+        }, 60000);
+    </script>
+
+    <!-- ===== SCHEMA MARKUP PARA SEO ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Merolikoo",
+        "description": "Plataforma de anuncios clasificados para comprar y vender productos",
+        "url": "https://merolikoo.com",
+        "applicationCategory": "ShoppingApplication",
+        "operatingSystem": "Android",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Merolikoo"
+        }
+    }
+    </script>
+</body>
+</html>
