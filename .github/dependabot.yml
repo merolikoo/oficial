@@ -1,0 +1,295 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/Mexico_City
+    open-pull-requests-limit: 10
+    versioning-strategy: auto
+    labels:
+      - dependencies
+      - npm
+      - automerge
+    commit-message:
+      prefix: chore
+      include: scope
+    reviewers:
+      - platform-dev-lead
+    assignees:
+      - koowexa-backend-team
+      - kooapp-frontend-team
+    target-branch: develop
+    platforms:
+      - KOOWEXA
+      - KOO-APP
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "09:00"
+      timezone: America/Mexico_City
+    open-pull-requests-limit: 5
+    labels:
+      - docker
+      - infrastructure
+      - containers
+    commit-message:
+      prefix: build
+    reviewers:
+      - platform-devops-lead
+    assignees:
+      - infrastructure-team
+    platforms:
+      - KOOWEXA
+      - KOOPODCAST
+      - KOOPAGES
+      - MEROLIKOO
+      - KOO-APP
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      day: first monday
+      time: "10:00"
+      timezone: America/Mexico_City
+    open-pull-requests-limit: 3
+    labels:
+      - github-actions
+      - ci-cd
+      - automation
+    reviewers:
+      - platform-devops-lead
+    platforms:
+      - KOOWEXA
+      - KOOPODCAST
+      - KOOPAGES
+      - MEROLIKOO
+      - KOO-APP
+
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+      day: wednesday
+      time: "09:00"
+      timezone: America/Mexico_City
+    open-pull-requests-limit: 8
+    versioning-strategy: increase-if-necessary
+    labels:
+      - php
+      - dependencies
+      - composer
+    reviewers:
+      - php-platform-lead
+    assignees:
+      - merolikoo-backend-team
+      - koopages-backend-team
+    target-branch: staging
+    platforms:
+      - MEROLIKOO
+      - KOOPAGES
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: thursday
+      time: "09:00"
+      timezone: America/Mexico_City
+    open-pull-requests-limit: 7
+    labels:
+      - python
+      - dependencies
+      - pip
+    reviewers:
+      - data-platform-lead
+    assignees:
+      - koopodcast-data-team
+      - koowexa-analytics-team
+    target-branch: develop
+    platforms:
+      - KOOPODCAST
+      - KOOWEXA
+
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: weekly
+      day: friday
+      time: "09:00"
+      timezone: America/Mexico_City
+    open-pull-requests-limit: 6
+    labels:
+      - ruby
+      - dependencies
+      - bundler
+    reviewers:
+      - web-platform-lead
+    assignees:
+      - koopages-web-team
+      - merolikoo-web-team
+    target-branch: develop
+    platforms:
+      - KOOPAGES
+      - MEROLIKOO
+
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 4
+    labels:
+      - dotnet
+      - dependencies
+      - nuget
+    reviewers:
+      - enterprise-platform-lead
+    assignees:
+      - koowexa-enterprise-team
+    platforms:
+      - KOOWEXA
+
+  - package-ecosystem: maven
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 4
+    labels:
+      - java
+      - dependencies
+      - maven
+    reviewers:
+      - mobile-platform-lead
+    assignees:
+      - kooapp-android-team
+    platforms:
+      - KOO-APP
+
+security-updates:
+  enabled: true
+  open-pull-requests-limit: 2
+  labels:
+    - security
+    - critical
+    - urgent
+  reviewers:
+    - platform-security-lead
+  assignees:
+    - security-response-team
+  platforms:
+    - KOOWEXA
+    - KOOPODCAST
+    - KOOPAGES
+    - MEROLIKOO
+    - KOO-APP
+
+groups:
+  react-platform-dependencies:
+    patterns:
+      - react
+      - react-dom
+      - react-native
+      - react-*
+    dependency-type: production
+    update-types:
+      - minor
+      - patch
+    exclude-patterns:
+      - react-native-web
+    platforms:
+      - KOO-APP
+
+  laravel-platform-dependencies:
+    patterns:
+      - laravel/*
+      - illuminate/*
+      - symfony/*
+    dependency-type: production
+    update-types:
+      - minor
+      - patch
+    platforms:
+      - MEROLIKOO
+      - KOOPAGES
+
+  audio-processing-dependencies:
+    patterns:
+      - pydub
+      - librosa
+      - soundfile
+      - ffmpeg-python
+    dependency-type: production
+    platforms:
+      - KOOPODCAST
+
+  testing-framework-dependencies:
+    patterns:
+      - *test*
+      - *spec*
+      - jest*
+      - phpunit*
+      - pytest*
+      - cypress*
+      - playwright*
+    dependency-type: development
+    exclude-patterns:
+      - production-test*
+    update-types:
+      - minor
+      - patch
+    platforms:
+      - KOOWEXA
+      - KOOPODCAST
+      - KOOPAGES
+      - MEROLIKOO
+      - KOO-APP
+
+  ecommerce-dependencies:
+    patterns:
+      - stripe*
+      - paypal*
+      - commerce*
+      - payment*
+    dependency-type: production
+    platforms:
+      - MEROLIKOO
+
+  analytics-dependencies:
+    patterns:
+      - analytics*
+      - mixpanel*
+      - segment*
+      - amplitude*
+    dependency-type: production
+    platforms:
+      - KOOWEXA
+      - KOO-APP
+
+  content-management-dependencies:
+    patterns:
+      - cms*
+      - contentful*
+      - strapi*
+      - graphql*
+    dependency-type: production
+    platforms:
+      - KOOPAGES
+
+ignore:
+  - dependency-name: legacy-package-*
+    versions:
+      - "> 1.0.0"
+    platforms:
+      - KOOPAGES
+  - dependency-name: deprecated-api-wrapper
+    versions:
+      - ">= 2.0.0"
+    platforms:
+      - MEROLIKOO
